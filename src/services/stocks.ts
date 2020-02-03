@@ -1,22 +1,26 @@
-import axios from 'axios';
 import LRU from 'lru-cache';
-import { CompanyInfo, GlobalQuote, ResultPriceInfo } from "../types";
+import {
+  CompanyInfo,
+  CompanyStockPrice,
+  GlobalQuote,
+  GlobalQuoteKey,
+  ResponseGlobalQuote,
+  ResultPriceInfo
+} from "../types";
 import LRUCache from "lru-cache";
+import {requestServices} from "./requestServices";
 
 
 export default class Stock {
   private stocksCache: LRUCache<string, ResultPriceInfo> = new LRU({ maxAge: 1000 * 60 * 60 })
 
-  constructor() {
-  }
-
   private getPrice(prices: GlobalQuote): ResultPriceInfo {
     return {
-      price: prices['05. price'],
+      price: prices[CompanyStockPrice.Price],
     };
   }
 
-  public async getStockPrices(company: CompanyInfo, apiKey: string): Promise<ResultPriceInfo> {
+  public async getStockPrices(company: CompanyInfo): Promise<ResultPriceInfo> {
     try {
       const {
         symbol,
@@ -28,9 +32,9 @@ export default class Stock {
         return cachedSymbol;
       } else {
 
-        const result = await axios.get(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${apiKey}`);
+        const result: ResponseGlobalQuote = await requestServices.getStocksBySymbol(symbol);
 
-        const pricesList: GlobalQuote = result.data['Global Quote'];
+        const pricesList: GlobalQuote = result[GlobalQuoteKey.GlobalQuote];
 
         const resultPrice: ResultPriceInfo =  this.getPrice(pricesList);
 

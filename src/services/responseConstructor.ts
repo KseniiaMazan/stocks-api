@@ -22,4 +22,4 @@ export default class ResponseConstructor {
   public sendInfo():void {
     this.response.status(200).json(this.resultCompanyInfo);
   }
-}
+};

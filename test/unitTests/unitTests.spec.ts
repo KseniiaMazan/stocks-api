@@ -6,8 +6,6 @@ import Stock from '../../src/services/stocks';
 const companiesList = new Company();
 const stocks = new Stock();
 
-const API_KEY: string = 'OKC0BT76URCJ1QBU';
-
 const companyInfo = {
   name: 'Wix.com Ltd.',
   symbol: 'WIX',
@@ -34,7 +32,7 @@ describe('Companies list request', () => {
           }
         ]});
 
-    const responseInfo = await companiesList.getCompaniesBySymbol('WIX', API_KEY);
+    const responseInfo = await companiesList.getCompaniesBySymbol('WIX');
 
     console.log(responseInfo);
 
@@ -65,7 +63,7 @@ describe('Stocks request', () => {
         }
       });
 
-      const resultPrice = await stocks.getStockPrices(companyInfo, API_KEY);
+      const resultPrice = await stocks.getStockPrices(companyInfo);
 
       expect(resultPrice).toEqual({
         price: '143.7500',

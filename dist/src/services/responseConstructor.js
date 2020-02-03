@@ -16,3 +16,4 @@ class ResponseConstructor {
     }
 }
 exports.default = ResponseConstructor;
+;

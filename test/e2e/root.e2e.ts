@@ -41,7 +41,7 @@ describe('Stocks API', () => {
       });
 
       const response = await request(app)
-        .get('/api/v1/')
+        .get('/api/v1/stocks/')
         .set('Accept', 'application/json')
         .query({
           symbol: 'WIX',
@@ -69,7 +69,7 @@ describe('Stocks API', () => {
        });
 
      const response = await request(app)
-       .get('/api/v1/')
+       .get('/api/v1/stocks/')
        .set('Accept', 'application/json')
        .query({
          symbol: 'W',
@@ -106,7 +106,7 @@ describe('Stocks API', () => {
       });
 
     const response = await request(app)
-      .get('/api/v1/')
+      .get('/api/v1/stocks/')
       .set('Accept', 'application/json')
       .query({
         symbol: 'WI',
