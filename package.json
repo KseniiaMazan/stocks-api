@@ -30,7 +30,7 @@
   "dependencies": {
     "@types/lru-cache": "^5.1.0",
     "axios": "^0.19.2",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "lru-cache": "^5.1.1"
   }
 }
